@@ -6,7 +6,7 @@
 
 O projeto simula um inventário da Horizonte Suprimentos. O objetivo é verificar se o saldo registrado no ERP na data de corte coincide com a contagem física feita nos depósitos. O SQL será usado para reconstruir os saldos e classificar as diferenças. O Python executará a análise e exportará as exceções e os indicadores por depósito.
 
-[Norma interna](norma-interna-inventario.md) · [Base do ERP](base.sql) · [Caderno de contagem em PDF](caderno-contagem-estoque.pdf) · [Transcrição da contagem](contagem-fisica.sql)
+[Norma interna](norma-interna-inventario.md) · [Base do ERP](base.sql) · [Caderno de contagem em PDF](output/pdf/caderno-contagem-estoque.pdf) · [Transcrição da contagem](contagem-fisica.sql)
 
 ## Objetivo e escopo
 
@@ -68,8 +68,11 @@ O resultado esperado é **35.928 movimentos, 480 linhas do caderno e 458 contage
 - [ ] Mapear as chaves do modelo e conferir a população.
 - [ ] Escrever a conciliação em SQL, mantendo uma linha por material e depósito.
 - [ ] Testar os lançamentos de fronteira e reconciliar as classificações.
-- [ ] Automatizar a execução e as exportações com Python.
+- [ ] Automatizar a execução da consulta SQL com Python e exportar os resultados em JSON. Incluir depósito, material, classificação, saldo esperado, quantidade contada, diferença e código da folha.
 - [ ] Comparar taxas de exceção por depósito e investigar dois casos.
+- [ ] Criar o painel no Lovable a partir do JSON, com cartões para itens no escopo, divergências e contagens pendentes. Incluir filtros por depósito e classificação e exibir o código da folha na tabela.
+- [ ] Validar o painel sem filtros contra o SQLite. Os resultados esperados são **480 combinações no escopo, 73 divergências (40 faltas e 33 sobras) e 22 contagens pendentes**.
 - [ ] Publicar o relatório, o painel e um resumo para o LinkedIn.
+- [ ] Como evolução opcional, criar uma API em Python que execute a mesma consulta em SQLite e devolva o mesmo formato JSON. Conectar o Lovable à API e conferir se os totais coincidem com os do painel alimentado pelo arquivo. Para um painel publicado, hospedar a API em um endereço HTTPS acessível ao aplicativo.
 
 As Normas Globais de Auditoria Interna do IIA orientam a estrutura do exercício, em especial objetivos e escopo (13.3), critérios (13.4), documentação (14.6) e comunicação final (15.1).
